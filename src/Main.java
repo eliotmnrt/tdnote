@@ -1,15 +1,24 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Data data = new Data();
+        List<Person> people = data.getPersons();
+        System.out.println("People:");
+        people.forEach(System.out::println);
+        System.out.println();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+    }
+
+    public static void flow1(List<Person> people) {
+        System.out.println("People filtered by birth place:");
+        List<Person> peopleFilteredByBirthPlace = Filter1.filterByBirthPlace(people, 2);
+        peopleFilteredByBirthPlace.forEach(System.out::println);
+        System.out.println();
+
+        List<PersonWithCategory> peopleWithCategory = AddColumn.addAgeCategory(people);
+        AddColumn.setPeopleWithCategory(peopleWithCategory);
+        System.out.println("People with age category:");
+        peopleWithCategory.forEach(System.out::println);
     }
 }
