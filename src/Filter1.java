@@ -20,4 +20,13 @@ public class Filter1 {
                 .filter(p -> p.lastName().equalsIgnoreCase(lastName))
                 .collect(Collectors.toList());
     }
+
+    public static double calculateAvgAge(List<Person> people) {
+        int sum = people.parallelStream()
+                .mapToInt(Person::age)
+                .sum();
+        double avg = (double) sum / people.size();
+        System.out.println("Average age: " + avg);
+        return avg;
+    }
 }
