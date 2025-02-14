@@ -8,8 +8,8 @@ public class Main {
         people.forEach(System.out::println);
         System.out.println();
 
+        flow1(people);
         flow2(people);
-
     }
 
     public static void flow1(List<Person> people) {
@@ -38,7 +38,7 @@ public class Main {
         Aggregation.cleanStats();
 
         Aggregation.getStatsByDepartments().forEach(s -> {
-            System.out.println(s.averageAge());
+            System.out.println("in department " + s.department() + " average age : " +s.averageAge());
         });
 
     }
