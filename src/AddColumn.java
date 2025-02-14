@@ -6,6 +6,12 @@ public class AddColumn {
     private static List<PersonWithCategory> peopleWithCategory;
 
     public static List<PersonWithCategory> addAgeCategory(List<Person> people) {
+        return people.stream()
+                .map(p -> new PersonWithCategory(p.firstName(), p.lastName(), p.age(), p.departmentId(), ageCategory(p.age())))
+                .collect(Collectors.toList());
+    }
+
+    public static List<PersonWithCategory> addAgeCategoryParallel(List<Person> people) {
         return people.parallelStream()
                 .map(p -> new PersonWithCategory(p.firstName(), p.lastName(), p.age(), p.departmentId(), ageCategory(p.age())))
                 .collect(Collectors.toList());

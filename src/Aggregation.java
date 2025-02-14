@@ -8,13 +8,25 @@ public class Aggregation {
     static List<StatsByDepartment> statsByDepartments = new ArrayList<>();
 
     public static void aggregate(List<Person> persons, List<DepartmentInfos> departmentInfos) {
+        departmentInfos.stream().map(dep ->{
+            System.out.println("People in department " + dep.departmentId() + ":");
+            List<Person> peopleInDepartment = SimpleFilter.filterByBirthPlace(persons, dep.departmentId());
+            peopleInDepartment.forEach(System.out::println);
+            int nbPersons = peopleInDepartment.size();
+
+            double avgAge =  CalculateAverage.calculateAvgAge(peopleInDepartment);
+            return new StatsByDepartment(dep.departmentName(), dep.departmentId(), nbPersons, avgAge);
+        }).forEach(Aggregation::addStats);
+    }
+
+    public static void aggregateParallel(List<Person> persons, List<DepartmentInfos> departmentInfos) {
         departmentInfos.parallelStream().map(dep ->{
             System.out.println("People in department " + dep.departmentId() + ":");
             List<Person> peopleInDepartment = Filter1.filterByBirthPlace(persons, dep.departmentId());
             peopleInDepartment.forEach(System.out::println);
             int nbPersons = peopleInDepartment.size();
 
-            double avgAge =  Filter1.calculateAvgAge(peopleInDepartment);
+            double avgAge =  CalculateAverage.calculateAvgAge(peopleInDepartment);
             return new StatsByDepartment(dep.departmentName(), dep.departmentId(), nbPersons, avgAge);
         }).forEach(Aggregation::addStats);
     }

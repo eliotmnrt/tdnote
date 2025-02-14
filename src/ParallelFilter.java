@@ -4,7 +4,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 import java.util.function.Predicate;
 
-public class Filter1 {
+public class ParallelFilter {
 
     static ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
 
@@ -14,15 +14,6 @@ public class Filter1 {
 
     public static List<Person> filterByBirthPlace(List<Person> people, int departmentId) {
         return forkJoinPool.invoke(new FilterTask(people, p -> p.departmentId() == departmentId));
-    }
-
-    public static double calculateAvgAge(List<Person> people) {
-        int sum = people.parallelStream()
-                .mapToInt(Person::age)
-                .sum();
-        double avg = (double) sum / people.size();
-        System.out.println("Average age: " + avg);
-        return avg;
     }
 
 
