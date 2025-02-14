@@ -43,7 +43,7 @@ public class Main {
         Aggregation.cleanStats();
 
         Aggregation.getStatsByDepartments().forEach(s -> {
-            System.out.println(s.averageAge());
+            System.out.println("in department " + s.department() + " average age : " +s.averageAge());
         });
 
     }
@@ -74,7 +74,7 @@ public class Main {
         Aggregation.cleanStats();
 
         Aggregation.getStatsByDepartments().forEach(s -> {
-            System.out.println(s.averageAge());
+            System.out.println("in department " + s.department() + " average age : " +s.averageAge());
         });
 
     }
